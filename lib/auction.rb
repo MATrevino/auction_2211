@@ -15,9 +15,9 @@ class Auction
     end
   end
 
-  def bids
-    items
-    require'pry';binding.pry
+  def unpopular_items
+    items.find_all do |item|
+      item.bids.empty?
+    end
   end
-
 end
