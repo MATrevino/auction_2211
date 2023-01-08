@@ -28,4 +28,14 @@ class Auction
     end
     potential.compact.sum
   end
+
+  def bidders
+    all_bidders = []
+
+    items.find_all do |item|
+     next if item.bids.empty? == true
+      all_bidders << item.bids.keys
+    end
+    all_bidders.flatten.uniq
+  end
 end
