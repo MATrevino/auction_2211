@@ -14,4 +14,10 @@ class Auction
       item.name
     end
   end
+
+  def bids
+    items
+    require'pry';binding.pry
+  end
+
 end
