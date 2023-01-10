@@ -108,7 +108,7 @@ RSpec.describe Auction do
     end
 
     #not a working method
-    xit 'can return a hash of bidder info' do
+    it 'can return a hash of bidder info' do
       auction.add_item(item1)
       auction.add_item(item2)
       auction.add_item(item3)

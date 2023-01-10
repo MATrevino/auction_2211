@@ -39,36 +39,55 @@ class Auction
     all_bidders.flatten.uniq
   end
 
-  #did not finish method
+  #did not finish method/worked on the commented out section. the correct method came after time was over.
 
-  # def bidder_info
-  #   hash = Hash.new({})
-  #   hash_of_item_by_attendees = {}
+  def bidder_info
+    hash = Hash.new({})
+    hash_of_item_by_attendees = {}
+
+    #other option
+    # bidders.to_h do |bidder|
+    #   [bidder, 
+    #     {
+    #     budget: bidder.budget,
+    #     items: @items.select { |item| item.bids.keys.include?(bidder) }
+    #     }
+    #   ]
+    # end
     
+    items.each do |item|
+      item.bids.each do |attendee, bid|
+        # require 'pry';binding.pry
+        if hash.has_key?(attendee)
+          hash[attendee][:items] << item
+        else 
+          hash[attendee] = { :budget => attendee.budget, :items => [item]}
+        end
+        # if bid[0].name == bid[0].name
+        #   items_for_attendee = []
+        #   items_for_attendee.push(item)
+        # end
+        # hash_of_item_by_attendees[bid] = items_for_attendee
+      end
+    end
+    
+    # bidders.each do |bidder|
+    #   hash_of_item_by_attendees.map do |attendee|
+    #     if bidder.name == attendee[0].name
+    #       values_of_items = []
+    #       items_only = attendee.pop
+    #       values_of_items.push(items_only)
+    #       hash[bidder] = {:budget => bidder.budget, :items => values_of_items}
+    #     end
+    #   end
+    # end
+    hash
+  end
+
+  # def items_group_by_bidder
+  #   items_by_bidder = {}
   #   items.map do |item|
-  #     item.bids.map do |bid|
-  #       # require 'pry';binding.pry
-  #       hash_of_item_by_attendees[bid[0]] = item
-  #     end
+  #     items_by_bidder[item] = item.bids
   #   end
-    
-  #   bidders.each do |bidder|
-  #     hash_of_item_by_attendees.map do |attendee|
-  #       if bidder.name == attendee[0].name
-  #         values_of_items = []
-  #         items_only = attendee.pop
-  #         values_of_items.push(items_only)
-  #         hash[bidder] = {:budget => bidder.budget, :items => values_of_items}
-  #       end
-  #     end
-  #   end
-  #   hash
   # end
-
-  # # def items_group_by_bidder
-  # #   items_by_bidder = {}
-  # #   items.map do |item|
-  # #     items_by_bidder[item] = item.bids
-  # #   end
-  # # end
 end
